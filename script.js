@@ -1,19 +1,31 @@
 const myBox = document.getElementsByClassName("image1")[0];
-const image = document.createElement("img");
-image.src = "gift-image.png";
-const otherContent = document.createElement("div");
-otherContent.className = "image2";
-
-otherContent.appendChild(image);
-const originalImageSrc = myBox.querySelector("img").src;
-
+const moveAmount = 10;
+let x = 0;
+let y = 0;
 
 document.addEventListener("keydown", event => {
-    myBox.querySelector("img").src = otherContent.querySelector("img").src;
-    myBox.style.backgroundColor = "tomato";
-});
+    
+    if(event.key.startsWith("Arrow")){
 
-document.addEventListener("keyup", event => {
-    myBox.querySelector("img").src = originalImageSrc;
-    myBox.style.backgroundColor = "lightBlue";
+        event.preventDefault();
+
+        switch(event.key){
+            case "ArrowUp":
+                y -= moveAmount;
+                break;
+            case "ArrowDown":
+                y += moveAmount;
+                break;
+            case "ArrowLeft":
+                x -= moveAmount;
+                break;
+            case "ArrowRight":
+                x += moveAmount;
+                break;
+        }
+
+        myBox.style.top = `${y}px`;
+        myBox.style.left = `${x}px`;
+
+    }
 });
